@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pandiyan Nursery Garden</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #0a1a0a; color: #f0f4ee; overflow-x: hidden; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(10,26,10,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid #2a4a2a; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 68px; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; color: #7ec850; letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { color: #c8dfc0; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: #7ec850; }
+  .nav-cta { background: #7ec850; color: #0a1a0a; border: none; padding: 10px 22px; border-radius: 24px; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+  .nav-cta:hover { background: #9fd96a; }
+
+  .hero { min-height: 92vh; display: flex; align-items: center; padding: 0 5%; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, #1a4020 0%, #0a1a0a 65%); }
+  .hero-circles { position: absolute; right: -60px; top: 50%; transform: translateY(-50%); width: 520px; height: 520px; }
+  .hero-circles .c1 { position: absolute; width: 420px; height: 420px; border-radius: 50%; border: 2px solid #2a5a2a; top: 50px; left: 50px; }
+  .hero-circles .c2 { position: absolute; width: 300px; height: 300px; border-radius: 50%; background: #1a3a1a; top: 110px; left: 110px; display: flex; align-items: center; justify-content: center; }
+  .hero-circles .leaf-icon { font-size: 120px; line-height: 1; }
+  .hero-content { position: relative; z-index: 2; max-width: 580px; }
+  .hero-tag { display: inline-block; background: #1a3a1a; border: 1px solid #3a6a3a; color: #7ec850; font-size: 12px; font-weight: 500; padding: 6px 16px; border-radius: 20px; margin-bottom: 28px; letter-spacing: 1px; text-transform: uppercase; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(42px, 6vw, 72px); line-height: 1.1; color: #f0f4ee; margin-bottom: 24px; }
+  .hero h1 span { color: #7ec850; }
+  .hero p { font-size: 17px; color: #9abf90; line-height: 1.7; margin-bottom: 36px; max-width: 460px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary { background: #7ec850; color: #0a1a0a; padding: 14px 32px; border-radius: 30px; font-size: 15px; font-weight: 500; border: none; cursor: pointer; transition: all 0.2s; }
+  .btn-primary:hover { background: #9fd96a; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: #7ec850; padding: 14px 32px; border-radius: 30px; font-size: 15px; font-weight: 500; border: 1.5px solid #3a6a3a; cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { border-color: #7ec850; }
+  .hero-stats { display: flex; gap: 40px; margin-top: 52px; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 32px; color: #7ec850; }
+  .stat-lbl { font-size: 13px; color: #6a9060; margin-top: 2px; }
+
+  section { padding: 80px 5%; }
+  .section-label { font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: #7ec850; margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 44px); line-height: 1.2; color: #f0f4ee; margin-bottom: 16px; }
+  .section-sub { font-size: 16px; color: #7a9a70; line-height: 1.7; max-width: 520px; }
+
+  .services { background: #0e200e; }
+  .services-header { margin-bottom: 52px; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .service-card { background: #0a1a0a; border: 1px solid #1e3a1e; border-radius: 16px; padding: 32px 28px; transition: border-color 0.2s, transform 0.2s; }
+  .service-card:hover { border-color: #4a8a4a; transform: translateY(-4px); }
+  .service-icon { width: 52px; height: 52px; background: #1a3a1a; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; }
+  .service-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #e0f0d8; margin-bottom: 10px; }
+  .service-card p { font-size: 14px; color: #6a9060; line-height: 1.7; }
+  .service-badge { display: inline-block; margin-top: 16px; font-size: 12px; color: #7ec850; background: #1a3a1a; padding: 4px 12px; border-radius: 20px; }
+
+  .plants-section { background: #0a1a0a; }
+  .plants-header { margin-bottom: 52px; }
+  .plants-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .plant-card { border: 1px solid #1e3a1e; border-radius: 14px; overflow: hidden; transition: border-color 0.2s; }
+  .plant-card:hover { border-color: #4a8a4a; }
+  .plant-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 64px; }
+  .p1 { background: #1a2e1a; } .p2 { background: #1e2a10; } .p3 { background: #2a1e0a; }
+  .p4 { background: #1a2a2a; } .p5 { background: #2a1a2a; } .p6 { background: #1e2e1a; }
+  .plant-info { padding: 16px; }
+  .plant-info h4 { font-size: 15px; font-weight: 500; color: #d8ecd0; margin-bottom: 4px; }
+  .plant-info p { font-size: 12px; color: #5a8050; }
+  .plant-price { font-size: 14px; font-weight: 500; color: #7ec850; margin-top: 8px; }
+
+  .gallery-section { background: #0e200e; }
+  .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 200px 200px; gap: 16px; margin-top: 40px; }
+  .gallery-item { border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+  .g1 { background: #1a3a1a; grid-row: span 2; font-size: 80px; }
+  .g2 { background: #2a3a10; } .g3 { background: #1a2a30; }
+  .g4 { background: #301a1a; } .g5 { background: #2a2a10; }
+
+  .contact-section { background: #0a1a0a; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
+  .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: #e0f0d8; margin-bottom: 28px; }
+  .contact-item { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+  .contact-icon { width: 42px; height: 42px; background: #1a3a1a; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .contact-item-text strong { display: block; font-size: 14px; color: #7ec850; margin-bottom: 4px; }
+  .contact-item-text span { font-size: 14px; color: #7a9a70; line-height: 1.6; }
+  .contact-form { background: #0e200e; border: 1px solid #1e3a1e; border-radius: 16px; padding: 32px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 13px; color: #7ec850; margin-bottom: 8px; font-weight: 500; }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; background: #0a1a0a; border: 1px solid #2a4a2a; border-radius: 10px; padding: 12px 16px; color: #d0e8c8; font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group textarea:focus { border-color: #7ec850; }
+  .form-group textarea { height: 120px; resize: none; }
+  .form-submit { width: 100%; background: #7ec850; color: #0a1a0a; border: none; padding: 14px; border-radius: 30px; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s; font-family: 'DM Sans', sans-serif; }
+  .form-submit:hover { background: #9fd96a; }
+
+  footer { background: #060f06; border-top: 1px solid #1a2e1a; padding: 32px 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; color: #7ec850; }
+  .footer-copy { font-size: 13px; color: #4a6a4a; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 13px; color: #5a8050; text-decoration: none; }
+  .footer-links a:hover { color: #7ec850; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-circles { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .g1 { grid-row: auto; }
+    footer { flex-direction: column; text-align: center; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">🌿 Pandiyan Nursery</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#plants">Plants</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-circles">
+    <div class="c1"></div>
+    <div class="c2"><span class="leaf-icon">🌳</span></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Melur, Madurai's Trusted Nursery</div>
+    <h1>Grow Your <span>Green</span> Dream Space</h1>
+    <p>Pandiyan Nursery Garden brings lush plants, expert garden maintenance, and tropical beauty right to your doorstep.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('plants').scrollIntoView({behavior:'smooth'})">Explore Plants</button>
+      <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Our Services</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">500+</div><div class="stat-lbl">Plant varieties</div></div>
+      <div><div class="stat-num">10+</div><div class="stat-lbl">Years experience</div></div>
+      <div><div class="stat-num">1000+</div><div class="stat-lbl">Happy customers</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="section-label">What we offer</div>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">From a single potted plant to a full garden transformation — we do it all with care and expertise.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🌱</div>
+      <h3>Plant Nursery</h3>
+      <p>Handpicked indoor, outdoor, flowering, and medicinal plants grown with care. Perfect for homes, offices, and gifting.</p>
+      <span class="service-badge">500+ varieties</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <h3>Garden Maintenance</h3>
+      <p>Regular upkeep including pruning, fertilizing, pest control, and watering. Monthly and annual contracts available.</p>
+      <span class="service-badge">AMC available</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏡</div>
+      <h3>Terrace Garden Setup</h3>
+      <p>Transform your terrace into a lush green paradise. We handle design, soil, pots, plants, and installation.</p>
+      <span class="service-badge">End-to-end setup</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚚</div>
+      <h3>Home Delivery</h3>
+      <p>Order plants from our WhatsApp catalogue and get them delivered fresh to your door.</p>
+      <span class="service-badge">Local delivery</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌿</div>
+      <h3>Landscaping</h3>
+      <p>Custom garden design for villas, apartments, and corporate spaces. Aesthetic and sustainable landscapes.</p>
+      <span class="service-badge">Custom design</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🪴</div>
+      <h3>Pots & Supplies</h3>
+      <p>Wide range of pots, soil mixes, compost, fertilizers, and garden tools — everything a gardener needs.</p>
+      <span class="service-badge">Quality products</span>
+    </div>
+  </div>
+</section>
+
+<section class="plants-section" id="plants">
+  <div class="plants-header">
+    <div class="section-label">Our collection</div>
+    <h2 class="section-title">Featured Plants</h2>
+    <p class="section-sub">A curated selection from our nursery — perfect for Madurai's warm tropical climate.</p>
+  </div>
+  <div class="plants-grid">
+    <div class="plant-card">
+      <div class="plant-img p1">🌿</div>
+      <div class="plant-info"><h4>Money Plant</h4><p>Indoor · Low maintenance</p><div class="plant-price">From ₹80</div></div>
+    </div>
+    <div class="plant-card">
+      <div class="plant-img p2">🌸</div>
+      <div class="plant-info"><h4>Bougainvillea</h4><p>Outdoor · Flowering</p><div class="plant-price">From ₹150</div></div>
+    </div>
+    <div class="plant-card">
+      <div class="plant-img p3">🌵</div>
+      <div class="plant-info"><h4>Aloe Vera</h4><p>Medicinal · Sunny spots</p><div class="plant-price">From ₹100</div></div>
+    </div>
+    <div class="plant-card">
+      <div class="plant-img p4">🌴</div>
+      <div class="plant-info"><h4>Areca Palm</h4><p>Indoor · Air purifier</p><div class="plant-price">From ₹300</div></div>
+    </div>
+    <div class="plant-card">
+      <div class="plant-img p5">🌺</div>
+      <div class="plant-info"><h4>Hibiscus</h4><p>Outdoor · Flowering</p><div class="plant-price">From ₹120</div></div>
+    </div>
+    <div class="plant-card">
+      <div class="plant-img p6">🌱</div>
+      <div class="plant-info"><h4>Snake Plant</h4><p>Indoor · Bedroom safe</p><div class="plant-price">From ₹200</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section" id="gallery">
+  <div class="section-label">Our work</div>
+  <h2 class="section-title">Garden Gallery</h2>
+  <p class="section-sub">A glimpse of the beautiful spaces we've created and maintained.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item g1">🌳</div>
+    <div class="gallery-item g2">🌸</div>
+    <div class="gallery-item g3">🌿</div>
+    <div class="gallery-item g4">🌺</div>
+    <div class="gallery-item g5">🪴</div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2 class="section-title">Contact & Location</h2>
+  <p class="section-sub">Visit our nursery or send us a message — we'd love to help you grow something beautiful.</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Find Us</h3>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-item-text">
+          <strong>Location</strong>
+          <span>Pandiyan Nursery Garden<br>Melur, Madurai District<br>Tamil Nadu – 625106</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-item-text">
+          <strong>Phone / WhatsApp</strong>
+          <span>+91 98436 58670<br>+91 97862 81502</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⏰</div>
+        <div class="contact-item-text">
+          <strong>Working Hours</strong>
+          <span>Monday – Saturday: 8am – 7pm<br>Sunday: 9am – 5pm</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🚚</div>
+        <div class="contact-item-text">
+          <strong>Delivery</strong>
+          <span>Free delivery for orders above ₹500<br>Across Melur & Madurai</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="E.g. Karthik Kumar">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 XXXXX XXXXX">
+      </div>
+      <div class="form-group">
+        <label>I'm interested in</label>
+        <select>
+          <option>Plant Purchase</option>
+          <option>Garden Maintenance</option>
+          <option>Terrace Garden Setup</option>
+          <option>Landscaping</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us what you need..."></textarea>
+      </div>
+      <button class="form-submit">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">🌿 Pandiyan Nursery Garden</div>
+  <div class="footer-copy">© 2025 Pandiyan Nursery Garden · Melur, Madurai</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#plants">Plants</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
